@@ -9,3 +9,5 @@ import {bootstrap, Component, View} from "angular2/angular2";
 	template: `Hello there!!!`
 })
 class GravelApp {}
+
+bootstrap(GravelApp)
