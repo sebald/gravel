@@ -3,12 +3,12 @@
 		"emitDecoratorMetadata": true,
 		"module": "commonjs",
 		"target": "es5",
-		"sourceMap": true,
-		"removeComments": true,
-		"outDir": "build"
+		"removeComments": true
 	},
+	"filesGlob": [
+		"src/**/*.ts"
+	],
 	"files": [
-		"src/gravel.ts",
-		"typings/angular2/angular2.d.ts"
+		"typings/tsd.d.ts"
 	]
 }

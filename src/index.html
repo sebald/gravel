@@ -11,7 +11,10 @@
 	
 	<gravel-app>Loading...<gravel-app>
 	<script>
-		System.import('src/gravel');
+		System.config({
+			baseURL: '/build/'
+		});
+		System.import('gravel');
 	</script>
 </body>
 </html>

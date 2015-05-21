@@ -7,6 +7,12 @@
   "installed": {
     "angular2/angular2.d.ts": {
       "commit": "e42bef3a8f9024a50468b12202df69519315b023"
+    },
+    "whatwg-fetch/whatwg-fetch.d.ts": {
+      "commit": "75903dbb9edbd1af3b2d12db56df4becab543879"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "75903dbb9edbd1af3b2d12db56df4becab543879"
     }
   }
 }
