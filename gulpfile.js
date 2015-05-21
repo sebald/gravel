@@ -6,7 +6,12 @@ var gulp = require('gulp'),
 	
 	del = require('del'),
 	assign = require('object-assign'),
-	
+
+	http = require('http'),
+	connect = require('connect'),
+	serveStatic = require('serve-static'),
+	open = require('open'),	
+
 
 	// Load configuration
 	config = require('./gulpfile.config.js')();
@@ -17,7 +22,7 @@ gulp.task('clean', function (done) {
 });
 
 
-gulp.task('source', function () {
+gulp.task('tsc', function () {
 	var files = config.typescript.files,
 		tsResult;
 
@@ -46,3 +51,24 @@ gulp.task('main', function () {
 	gulp.src(config.main)
 		.pipe(gulp.dest(config.path.dest));
 });
+
+
+gulp.task('start', ['default'], function () {
+	var port = 3000,
+		app;
+
+	gulp.watch(config.typescript.files, ['tsc']);
+	gulp.watch(config.main, ['main']);
+
+    app = connect();
+
+    app.use(serveStatic(__dirname + config.path.dest.replace('./', '/')));  // serve everything that is static
+
+    http.createServer(app).listen(port, function () {
+      console.log('\n', 'Server listening on port', port, '\n');
+	  open('http://localhost:' + port);
+    });	
+});
+
+
+gulp.task('default', ['tsc', 'main', 'libs']);
