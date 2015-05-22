@@ -8,7 +8,7 @@ import {GithubService} from "components/github/github.service";
 	injectables: [GithubService]
 })
 @View({
-	template: `Hello there!!!1`
+	template: `Hello there!!!`
 })
 class GravelApp {
 	constructor(public api:GithubService) {

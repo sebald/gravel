@@ -4,7 +4,6 @@ var gulp = require('gulp'),
 	ts = require('gulp-typescript'),
 	sourcemaps = require('gulp-sourcemaps'),	
 	
-	livereload = require('gulp-livereload'),
 	browserSync = require('browser-sync'),
 	reload = browserSync.reload,
 	
@@ -58,16 +57,15 @@ gulp.task('main', function () {
 
 
 gulp.task('start', ['default'], function ( done ) {
-
 	gulp.watch(config.typescript.files, ['tsc', 'reload']);
 	gulp.watch(config.main, ['main', 'reload']);
 	
-	
 	browserSync({
 		server: {
-			baseDir: 'build'
+			baseDir: config.path.dest
 		},
-		open: true
+		open: true,
+		notify: false
 	});
 });
 
