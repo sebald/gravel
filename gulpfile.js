@@ -4,12 +4,15 @@ var gulp = require('gulp'),
 	ts = require('gulp-typescript'),
 	sourcemaps = require('gulp-sourcemaps'),	
 	
+	livereload = require('gulp-livereload'),
+	browserSync = require('browser-sync'),
+	reload = browserSync.reload,
+	
 	del = require('del'),
 	assign = require('object-assign'),
 
 	http = require('http'),
-	connect = require('connect'),
-	serveStatic = require('serve-static'),
+	st = require('st'),
 	open = require('open'),	
 
 
@@ -20,6 +23,8 @@ var gulp = require('gulp'),
 gulp.task('clean', function (done) {
 	del([config.path.dest], done);
 });
+
+gulp.task('reload', reload );
 
 
 gulp.task('tsc', function () {
@@ -34,7 +39,7 @@ gulp.task('tsc', function () {
 			{ sortOutput: true }
 		)));
 		
-	return tsResult.js
+	tsResult.js
 		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(config.path.dest));
 });
@@ -47,27 +52,23 @@ gulp.task('libs', function () {
 
 
 gulp.task('main', function () {
-	console.log(config.main);
-	gulp.src(config.main)
+	gulp.src(config.main)	
 		.pipe(gulp.dest(config.path.dest));
 });
 
 
-gulp.task('start', ['default'], function () {
-	var port = 3000,
-		app;
+gulp.task('start', ['default'], function ( done ) {
 
-	gulp.watch(config.typescript.files, ['tsc']);
-	gulp.watch(config.main, ['main']);
-
-    app = connect();
-
-    app.use(serveStatic(__dirname + config.path.dest.replace('./', '/')));  // serve everything that is static
-
-    http.createServer(app).listen(port, function () {
-      console.log('\n', 'Server listening on port', port, '\n');
-	  open('http://localhost:' + port);
-    });	
+	gulp.watch(config.typescript.files, ['tsc', 'reload']);
+	gulp.watch(config.main, ['main', 'reload']);
+	
+	
+	browserSync({
+		server: {
+			baseDir: 'build'
+		},
+		open: true
+	});
 });
 
 

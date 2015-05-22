@@ -1,14 +1,16 @@
 {
-	"compilerOptions": {
-		"emitDecoratorMetadata": true,
-		"module": "commonjs",
-		"target": "es5",
-		"removeComments": true
-	},
-	"filesGlob": [
-		"src/**/*.ts"
-	],
-	"files": [
-		"typings/tsd.d.ts"
-	]
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "module": "commonjs",
+        "target": "es5",
+        "removeComments": true
+    },
+    "filesGlob": [
+        "src/**/*.ts"
+    ],
+    "files": [
+        "src/app/gravel.ts",
+        "src/components/github/github.config.ts",
+        "src/components/github/github.service.ts"
+    ]
 }

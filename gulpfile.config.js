@@ -33,7 +33,13 @@ function Config () {
 	
 	
 	// Main (index.html)
-	config.main = config.path.src + '/index.html';	
+	config.main = config.path.src + '/index.html';
+	
+	
+	// Server
+	config.server = {
+		port: 3000
+	};
 }
 
 module.exports = function () {
