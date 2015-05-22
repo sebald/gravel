@@ -3,17 +3,14 @@
 var gulp = require('gulp'),
 	ts = require('gulp-typescript'),
 	sourcemaps = require('gulp-sourcemaps'),	
+	change = require('gulp-change'),
+    rename = require('gulp-rename'),
 	
 	browserSync = require('browser-sync'),
 	reload = browserSync.reload,
 	
 	del = require('del'),
 	assign = require('object-assign'),
-
-	http = require('http'),
-	st = require('st'),
-	open = require('open'),	
-
 
 	// Load configuration
 	config = require('./gulpfile.config.js')();
@@ -55,6 +52,21 @@ gulp.task('main', function () {
 		.pipe(gulp.dest(config.path.dest));
 });
 
+
+gulp.task('gravel-config', function () {
+    gulp.src(config.gravel)
+        .pipe(change(function (content) {
+            content = 'window.GRAVEL_CONFIG = ' + content + ';';
+            console.log(content);
+            return content;
+        }))
+        .pipe(rename({ extname: '.js' }))
+        .pipe(gulp.dest(config.path.dest + '/app'));
+});
+
+
+
+// ===================================== //
 
 gulp.task('start', ['default'], function ( done ) {
 	gulp.watch(config.typescript.files, ['tsc', 'reload']);

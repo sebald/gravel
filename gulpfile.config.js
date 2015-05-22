@@ -40,6 +40,9 @@ function Config () {
 	config.server = {
 		port: 3000
 	};
+    
+    // Github Configuration
+    config.gravel = 'gravel.config.json';
 }
 
 module.exports = function () {

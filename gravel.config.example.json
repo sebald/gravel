@@ -1,0 +1,7 @@
+{
+    "token": "1234567",
+    "repositories": [{
+        "owner": "sebald",
+        "name": "gravel"
+    }]
+}
