@@ -1,18 +1,21 @@
 /// <reference path="../../typings/angular2/angular2" />
 
+import GRAVEL_CONFIG from './gravel.config';
 import {bootstrap, Component, View} from "angular2/angular2";
-import {GithubService} from "components/github/github.service";
+import {GithubRepositoryFactory} from "components/github/github-repository.factory";
 
 @Component({
 	selector: 'gravel-app',
-	injectables: [GithubService]
+	injectables: [GithubRepositoryFactory]
 })
 @View({
 	template: `Hello there!!!`
 })
 class GravelApp {
-	constructor(public api:GithubService) {
-		console.log(api);
+    repo: GithubRepositoryFactory
+    
+	constructor(repo:GithubRepositoryFactory) {
+        let token = GRAVEL_CONFIG.token;
 	}
 }
 

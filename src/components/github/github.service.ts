@@ -3,7 +3,7 @@
 import GITHUB_CONFIG from 'github.config';
 
 export class GithubService {
-	loading: boolean;
+	loading: boolean
 	
 	constructor() {
 		this.loading = false;

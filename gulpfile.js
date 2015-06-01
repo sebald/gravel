@@ -55,8 +55,9 @@ gulp.task('main', function () {
 
 gulp.task('gravel-config', function () {
     gulp.src(config.gravel)
-        .pipe(change(function (content) {
-            content = 'window.GRAVEL_CONFIG = ' + content + ';';
+        .pipe(change(function (content) {         
+            content = 'const GRAVEL_CONFIG = ' + content + '\n';
+            content += 'export default GRAVEL_CONFIG';
             console.log(content);
             return content;
         }))
@@ -71,6 +72,7 @@ gulp.task('gravel-config', function () {
 gulp.task('start', ['default'], function ( done ) {
 	gulp.watch(config.typescript.files, ['tsc', 'reload']);
 	gulp.watch(config.main, ['main', 'reload']);
+    gulp.watch(config.gravel, ['gravel-config'], 'reload');
 	
 	browserSync({
 		server: {
@@ -82,4 +84,4 @@ gulp.task('start', ['default'], function ( done ) {
 });
 
 
-gulp.task('default', ['tsc', 'main', 'libs']);
+gulp.task('default', ['tsc', 'main', 'libs', 'gravel-config']);

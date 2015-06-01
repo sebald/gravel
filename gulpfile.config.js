@@ -3,6 +3,7 @@
 function Config () {	
 	var config = this;
 
+
 	// Paths
 	config.path = {
 		src: './src',
@@ -17,11 +18,18 @@ function Config () {
 		'node_modules/es6-promise/dist/es6-promise.js',
 		'node_modules/whatwg-fetch/fetch.js'		
 	];
+
+    
+    // Configuration Files
+    config.gravel = 'gravel.config.json';
 	
 	
 	// Typescript
 	config.typescript = {
-		files: config.path.src + '/**/*.ts',
+		files: [
+            config.path.src + '/**/*.ts', 
+            '!' + config.path.src + '/app/gravel.config.ts'
+        ],
 		tsd: config.path.typings + '/**/d.ts',
 		tsconfig: {
 			"emitDecoratorMetadata": true,
@@ -40,9 +48,6 @@ function Config () {
 	config.server = {
 		port: 3000
 	};
-    
-    // Github Configuration
-    config.gravel = 'gravel.config.json';
 }
 
 module.exports = function () {
